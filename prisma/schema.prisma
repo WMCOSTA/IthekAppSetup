@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String        @id
+  // declara que um usuáro pode ter vários planos de treinos
+  WorkoutPlans  WorkoutPlan[]
+  name          String
+  email         String
+  emailVerified Boolean       @default(false)
+  image         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+// palno de treino
+
+model WorkoutPlan {
+  id          String       @id @default(uuid())
+  name        String
+  // declara que um plano de treino pode ter um usuário
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  // declara quais os dias pertencem aqule plano de treino
+  workoutDays WorkoutDay[]
+  isActive    Boolean      @default(true)
+  created     DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+// Dia de treino
+
+model WorkoutDay {
+  id            String            @id @default(uuid())
+  name          String
+  // declara o plano de treino que pertence aquele dia
+  workoutPlanId String
+  workoutPlan   WorkoutPlan       @relation(fields: [workoutPlanId], references: [id])
+  isRest        Boolean           @default(false)
+  weekday       Weekday
+  // declara a lista de execicios que pertence aquele dia
+  exercices     WorkoutExercice[]
+  created       DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model WorkoutExercice {
+  id               String     @id @default(uuid())
+  name             String
+  order            Int
+  // declara o dia em o execicio pertence
+  workoutDayId     String
+  workoutDay       WorkoutDay @relation(fields: [workoutDayId], references: [id])
+  sets             Int
+  reps             Int
+  restTimeSecounds Int
+  created          DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+
+enum Weekday {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRYDAY
+  SATURDAY
+  SUNDAY
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}

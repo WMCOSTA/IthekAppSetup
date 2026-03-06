@@ -1,0 +1,411 @@
+configurando o typeScript
+npx tsc --init
+
+Compilando o projeto typeScript
+C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx tsc
+
+indicar versão para uso
+nvm use 24
+
+Instalação e configuração do servidor de desenvolvimento
+dos pacotes para o servidor local usar hotReload e Deploy
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install tsx@4.21.0 -D
+
+Executando o servidor para atualizar automaticamente
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm run dev
+
+Configurando no package.json a versão do node para a versão que voc~e está usando
+
+"engines": {
+"node": "24.x"
+},
+
+Se, voce tentar usar uma versão diferente, não será possível:
+
+C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> nvm use 24
+Now using node v24.16.0 (64-bit)
+
+Agora tente executar o comando abaixo:
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install
+npm error code EBADENGINE
+npm error engine Unsupported engine
+npm error engine Not compatible with your version of node/npm: ithek-treinos@1.0.0
+npm error notsup Not compatible with your version of node/npm: ithek-treinos@1.0.0
+npm error notsup Required: {"node":"24.x"}
+npm error notsup Actual: {"node":"v22.16.0","npm":"11.6.4"}
+
+**\*\*\*\***\*\*\*\***\*\*\*\*** fim das configurações e sutup do projeto **\*\*\*\***\*\*\*\***\*\*\*\***
+
+Configurando o eslint para padronizar a escrita do código
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm create @eslint/config@1.11.0
+
+> ithek-treinos@1.0.0 npx
+> create-config
+
+@eslint/create-config: v1.11.0
+
+√ What do you want to lint? · javascript
+√ How would you like to use ESLint? · problems  
+√ What type of modules does your project use? · esm
+√ Which framework does your project use? · none
+√ Does your project use TypeScript? · No / Yes
+√ Where does your code run? · browser
+√ Which language do you want your configuration file be written in? · js
+i The config that you've selected requires the following dependencies:
+
+eslint, @eslint/js, globals, typescript-eslint
+√ Would you like to install them now? · No / Yes
+√ Which package manager do you want to use? · npm
+☕️Installing...
+npm warn idealTree Removing dependencies.eslint in favor of devDependencies.eslint
+
+added 18 packages, removed 16 packages, changed 14 packages, and audited 97 packages in 25s
+
+34 packages are looking for funding
+run `npm fund` for details
+
+found 0 vulnerabilities
+√ Successfully created C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos\eslint.config.js file.
+
+E depois, devemos instalar aextensão do Eslint no Vs code
+
+Instalação da extensão do Prettier no Vs code
+
+INSTALAR O PACKAGE PARA AS EXTENSÃO RODAREM EM CONJUNTO E OCORRE CONFLITOS ENTRE AS SUAS REGRAS
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install eslint-config-prettier@10.1.8
+
+Plugin para organizar os Imports
+
+https://www.npmjs.com/package/eslint-plugin-simple-import-sort
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install eslint-plugin-simple-import-sort@12.1.1
+
+OBS: Para reorganizar os imports, CTRL + PONTO(.) e escolher a opção "fix all auto-fixable problems
+
+Ajustar para o "eslint-config-prettier" formatar automaticamente o código quando salvar
+
+Passo 1 - Criar o arquivo .vscode\settings.json na raiz do projeto
+
+{
+"editor.formatOnSave": true,
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"editor.codeActionsOnSave": {
+"source.fixAll.eslint": "always"
+}
+}
+
+----------- iniciando configuração do framework para o backend Node Js ------------
+
+Qual usar?
+
+Express - Fornece o fundamental e o resto você constroi sozinho e está ficando desatualizado. Exemplo ele ainda não suporta ESN. Não está de acordo com o padrão mais moderno da industria JavaScript e não é tão rápido. Porém, é um dos mais usados no mercado
+
+O Mais indicado é o Next ou Fastify
+
+Fastify usa o express por baixo, porem é mais rápido
+
+Intalando:
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install fastify@5.7.4
+
+Adicionado um exemplo de uma API no index.ts
+
+// Import the framework and instantiate it
+import Fastify from "fastify";
+const fastify = Fastify({
+logger: true,
+});
+
+// Declare a route
+fastify.get("/", async function handler() {
+return {
+Williams:
+"Você está usando o Fastify. Simplismente o melhor e mais atualizado framework para o backend Node",
+};
+});
+
+// Run the server!
+try {
+await fastify.listen({ port: 8080 });
+} catch (err) {
+fastify.log.error(err);
+//process.exit(1);
+}
+
+otimizando a aplicação
+
+Instalando o dotend
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install dotenv@17.3.1
+
+**\*\***\*\***\*\*** usando a biblioteca ZOD para construção de backend **\*\*\*\***\*\*\***\*\*\*\***
+
+USADO PARA VALIDAR OBJETOS.
+
+EX: VERIFICAR SE EXISTE A PROPRIEDADE NOME, SE CAMPO XPTO TEM N CARACTERES, ETC...
+
+Instalando:
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install zod@4.3.6 fastify-type-provider-zod@6.1.0
+
+**\*\***\***\*\*** documentando a api de forma automática **\*\***\*\***\*\***
+
+Instalando os packages
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install @fastify/swagger@9.7.0 @fastify/swagger-ui@5.2.5
+
+**\*\***\***\*\*** configurando o banco de dados \***\*\*\*\*\***\*\*\***\*\*\*\*\***
+
+OBS: Quando escolher um banco NoSQL ou SQL?
+
+    SQL - Quando temos um relacionanmento forte entre as entidades.
+
+    Ex: O App de treino tem usuário - plano de treino - tem num dia - tem seus exercícios
+
+    - Querer um esquema forte - Tudo que for gravado deve seguir um padrão
+
+    Ex: nome é tipo string - Data é timestamp, etc...
+
+
+    NOSQL - Quais séries foram assistidas na sua aplicação
+
+    Ex: Quero armazenar que o usuário NetFlix assistiu uma determinada série
+    PRIORIZAR LEITURA EM DETRIMENTO A ESCRITA
+
+CONFIGURANDO O ORM PRISMA QUE FACILITA O TRABALHO COM BANCO DE DADOS
+
+EX: Faz a Escrita de SQL para você
+
+instalando o ORM
+
+Client e Adpter
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install @prisma/client@7.4.0 @prisma/adapter-pg@7.4.0
+
+Prisma como dependencia de deenvolvimento
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install prisma@7.4.0 -D
+
+Iniciando o banco de dados:
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma init
+
+Initialized Prisma in your project
+
+prisma/
+schema.prisma
+prisma.config.ts
+.env
+
+warn You already have a .gitignore file. Don't forget to add .env in it to not commit any private information.
+
+Next, choose how you want to set up your database:
+
+CONNECT EXISTING DATABASE:
+
+1. Configure your DATABASE_URL in prisma.config.ts
+2. Run prisma db pull to introspect your database.
+
+CREATE NEW DATABASE:
+Local: npx prisma dev (runs Postgres locally in your terminal)
+Cloud: npx create-db (creates a free Prisma Postgres database)
+
+Then, define your models in prisma/schema.prisma and run prisma migrate dev to apply your schema.
+
+Learn more: https://pris.ly/getting-started
+
+Obs: Instale a extensão do prisma
+
+Definindo a estruturae relacionamento entre as tabelas no arquivo schema.prisma
+
+Formatando
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma format
+
+Criando o banco de dados usando o docker compose
+
+- subir o docker local
+
+Executar o comando:
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> docker compose up -d
+[+] Running 12/12
+✔ postgres Pulled 42.8s
+[+] Running 3/3
+✔ Network ithek-treinos_default Created 0.5s
+✔ Volume "ithek-treinos_postgres_data" Created 0.1s
+✔ Container app-treinos-api-postgres Started
+
+Atualizar a URL do banco no arquivo .env para
+
+DATABASE_URL="postgresql://postgres:password@localhost:5432/app-treinos-db
+
+Se conecta com o banco e Criar as tabelas
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma db push
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos>
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma.npx prisma db push
+Datasource "db": PostgreSQL database "app-treinos-db", schema "public" at "127.0.0.1:5432"
+
+Your database is now in sync with your Prisma schema. Done in 2.29s
+
+Verificando ciação do banco e tabelas
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma studio  
+Loaded Prisma config from prisma.config.ts.
+
+Prisma Studio is running at: http://localhost:51212
+
+**\*\*\*\***\***\*\*\*\*** AUTENTICAÇÃO **\*\***\*\***\*\***\***\*\***\*\***\*\***
+
+Instalando o better-auth@1.4.18
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install better-auth@1.4.18
+
+Acesse
+https://better-auth.com/docs/installation
+
+- Gere BETTER_AUTH_SECRET=aNKGzLH2U80DYUehewCrwTmjxlSGqkW6
+- Copie Set Base URL
+
+Atualizando o arquivo .env com as variaveis
+
+BETTER_AUTH_SECRET=aNKGzLH2U80DYUehewCrwTmjxlSGqkW6
+BETTER_AUTH_URL=http://localhost:8081 # Base URL of your app
+
+Executar o comando para gerar o prisma client
+
+Obs: Toda vez que for executado um "db push" para puxar as atualizações do banco, também devemos
+executar "prisma generate" para atualar o Schema conforme abaixo:
+
+npx prisma db push
+
+devemos rodar também
+
+npx prisma generate
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma generate
+
+Loaded Prisma config from prisma.config.ts.
+Prisma schema loaded from prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.4.0) to .\src\generated\prisma in 345ms
+
+Configurando o arquivo auth.ts
+
+Executar o comando PARA Geração DAS TABELAS PADRÕES NECESSÁRIAS PARA O FUNCIONAMENTO DO "BETTER-AUTH"
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx @better-auth/cli@1.4.18 generate
+
+ocorre o erro abaixo:
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx @better-auth/cli@1.4.18 generate
+file:///C:/Users/user/AppData/Local/npm-cache/_npx/4ee734aedbc45ba3/node_modules/@better-auth/cli/dist/generators-Ht8QYIi_.mjs:4
+import { getAuthTables, getMigrations } from "better-auth/db";
+^^^^^^^^^^^^^
+SyntaxError: The requested module 'better-auth/db' does not provide an export named 'getMigrations'
+at #asyncInstantiate (node:internal/modules/esm/module_job:319:21)
+at async ModuleJob.run (node:internal/modules/esm/module_job:422:5)
+at async onImport.tracePromise.**proto** (node:internal/modules/esm/loader:661:26)
+at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.14.0
+
+O erro ocorre porque há uma incompatibilidade de versões entre o CLI que você está tentando rodar (1.4.18) e a versão da biblioteca better-auth instalada no seu projeto (provavelmente uma versão mais antiga que não possui o export getMigrations).
+Para corrigir, siga estes passos:
+
+Atualize para a versão npx @better-auth/cli@1.4.21 generate
+
+OBS: ESSA VERSÃO ESTAVA GERANDO ERRO DE INCOMPATIBILIDADE CONFORME ACIMA
+
+    "better-auth": "^1.5.3",
+
+\***\*\*\*\*\*\*\*** SCHEMA GERADO COM SUCESSO !!!!!!!!**\*\***\***\*\***
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx better-auth generate
+√ The file ./prisma/schema.prisma already exists. Do you want to overwrite the schema to the file? ... yes
+🚀 Schema was overwritten successfully!
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma db push
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma.
+Datasource "db": PostgreSQL database "app-treinos-db", schema "public" at "127.0.0.1:5432"
+
+Your database is now in sync with your Prisma schema. Done in 10.90s
+┌─────────────────────────────────────────────────────────┐
+│ Update available 7.4.0 -> 7.4.2 │
+│ Run the following to update │
+│ npm i --save-dev prisma@latest │
+│ npm i @prisma/client@latest │
+└─────────────────────────────────────────────────────────┘
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma generate
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.4.0) to .\src\generated\prisma in 174ms
+
+**\*\***\*\*\***\*\*** AGORA PRECISAMOS INTEGRA BETTER-AUTH COM A APLICAÇÃO DO FASTIFY \*\*\*\*\*\*\*\
+
+NO ARQUIVO INDEX.TS
+
+// Register authentication endpoint TODA ROTA QUE COMEÇAR POR "/api/auth/_", O BETTER-AUTH IRÁ CUIDAR DELA
+//Como se comporta o "app.route" na sequencia: ele PEGA A URL, PEGAR OS HEADERS, FAZER UMA REQUEST E CHAMAR O MEU AUTH
+app.route({
+method: ["GET", "POST"],
+url: "/api/auth/_",
+async handler(request, reply) {
+try {
+// Construct request URL
+const url = new URL(request.url, `http://${request.headers.host}`);
+
+      // Convert Fastify headers to standard Headers object
+      const headers = new Headers();
+      Object.entries(request.headers).forEach(([key, value]) => {
+        if (value) headers.append(key, value.toString());
+      });
+      // Create Fetch API-compatible request
+      const req = new Request(url.toString(), {
+        method: request.method,
+        headers,
+        ...(request.body ? { body: JSON.stringify(request.body) } : {}),
+      });
+      // Process authentication request
+      const response = await auth.handler(req);
+      // Forward response to client
+      reply.status(response.status);
+      response.headers.forEach((value, key) => reply.header(key, value));
+      reply.send(response.body ? await response.text() : null);
+    } catch (error) {
+      app.log.error(error);
+      //app.log.error("Authentication Error:", error);
+      reply.status(500).send({
+        error: "Internal authentication error",
+        code: "AUTH_FAILURE",
+      });
+    }
+
+},
+});
+
+agora!!! devemos fazer a Instalação do Fastify Dependencies:
+
+npm install fastify @fastify/cors@11.2.0
+
+**\*\***\***\*\*** ADICIONANDO A BIBLIOTECA SCALAR **\*\***\*\*\***\*\***
+
+EXIBE A DOCUMENTAÇÃO DE FORMA MAIS BONITA E ORGANIZADA
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install @scalar/fastify-api-reference@1.44.20
+
+balança de bioimped~encia FitDays
+
+resumo de todas as taxas corporais conforme peso, idade e altura
