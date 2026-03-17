@@ -7,8 +7,7 @@ C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx tsc
 indicar versão para uso
 nvm use 24
 
-Instalação e configuração do servidor de desenvolvimento
-dos pacotes para o servidor local usar hotReload e Deploy
+***configuração do servidor de desenvolvimento para usar hotReload e Deploy
 
 PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install tsx@4.21.0 -D
 
@@ -36,7 +35,7 @@ npm error notsup Not compatible with your version of node/npm: ithek-treinos@1.0
 npm error notsup Required: {"node":"24.x"}
 npm error notsup Actual: {"node":"v22.16.0","npm":"11.6.4"}
 
-**\*\*\*\***\*\*\*\***\*\*\*\*** fim das configurações e sutup do projeto **\*\*\*\***\*\*\*\***\*\*\*\***
+**\*\*\\*** fim das configurações e sutup do projeto *\*\*\*\***\*\*\*\***
 
 Configurando o eslint para padronizar a escrita do código
 
@@ -255,7 +254,7 @@ Datasource "db": PostgreSQL database "app-treinos-db", schema "public" at "127.0
 
 Your database is now in sync with your Prisma schema. Done in 2.29s
 
-Verificando ciação do banco e tabelas
+********************** Verificando ciação do banco e tabelas ****************
 
 PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npx prisma studio  
 Loaded Prisma config from prisma.config.ts.
@@ -406,6 +405,12 @@ EXIBE A DOCUMENTAÇÃO DE FORMA MAIS BONITA E ORGANIZADA
 
 PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm install @scalar/fastify-api-reference@1.44.20
 
-balança de bioimped~encia FitDays
+
+TESTANDO A APLICAÇÃO
+
+PS C:\Ithek-Projetos\FullStackClub\Saas-FullStack\Ithek-Treinos> npm run dev
+
+
+balança de bioimpedancia FitDays
 
 resumo de todas as taxas corporais conforme peso, idade e altura

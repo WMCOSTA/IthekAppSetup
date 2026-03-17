@@ -72,7 +72,7 @@ await app.register(fastifyApiReference, {
       {
         title: "Auth API",
         slug: "auth-api",
-        url: "/api/auth/open-api/generete-schema", // URL da API do better-auth será usada para gerar documentação
+        url: "/api/auth/open-api/generate-schema", // URL da API do better-auth será usada para gerar documentação
       },
     ],
   },
